@@ -12,7 +12,7 @@ void bubble_sort(int *array, size_t size)
 	size_t i, j;
 	int tmp;
 
-	if (array)
+	if (array && size > 2)
 	{
 		for (i = 0; i < size; i++)
 		{
@@ -28,14 +28,19 @@ void bubble_sort(int *array, size_t size)
 			}
 		}
 	}
-}
-
-/**
- * _putchar - write 1 char to stdout
- * @c: the char to write
- * Return: nothing
- */
-void _putchar(char c)
-{
-	write(1, &c, 1);
+	else if (array && size == 2)
+	{
+		for (i = 0; i < 1; i++)
+		{
+			if (array[i] > array[i + 1])
+			{
+				tmp = *array;
+				array[i] = array[i + 1];
+				array[i + 1] = tmp;
+			}
+			print_array(array, size);
+		}
+	}
+	else if (array)
+		print_array(array, size);
 }
