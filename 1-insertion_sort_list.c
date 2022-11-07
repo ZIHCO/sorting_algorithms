@@ -23,7 +23,7 @@ void insertion_sort_list(listint_t **list)
 			{
 				swap_two(node);
 				*list = node;
-				print_list(*list);
+				print_list(node);
 				node = node->next;
 			}
 			else
@@ -31,14 +31,11 @@ void insertion_sort_list(listint_t **list)
 				prev_node = node->prev;
 				next_node = node->next;
 				if (prev_node->prev && next_node)
-				{
 					swap_node(node);
-				}
 				else if (prev_node->prev == NULL)
 				{
 					swap_start(node);
 					*list = node;
-					print_list(*list);
 					node = node->next;
 				}
 				else if (next_node == NULL)
@@ -65,6 +62,7 @@ void swap_end(listint_t *node)
 	(prev_node->prev)->next = node;
 	prev_node->prev = node;
 	node->next = prev_node;
+	node = node->next;
 }
 
 /**
