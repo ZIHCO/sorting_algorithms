@@ -37,7 +37,7 @@ void insertion_sort_list(listint_t **list)
 					swap_start(node);
 					*list = node;
 					print_list(*list);
-					break;
+					node = node->next;
 				}
 				else if (next_node == NULL)
 					swap_end(node);
