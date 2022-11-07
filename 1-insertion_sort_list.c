@@ -31,7 +31,9 @@ void insertion_sort_list(listint_t **list)
 				prev_node = node->prev;
 				next_node = node->next;
 				if (prev_node->prev && next_node)
-					swap_two(node);
+				{
+					swap_node(node);
+				}
 				else if (prev_node->prev == NULL)
 				{
 					swap_start(node);
