@@ -11,39 +11,42 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *tmp, *node, *next_node, *prev_node;
 
-	tmp = *list;
-	while (tmp)
+	if (list)
 	{
-		node = tmp->next;
-		while (node)
+		tmp = *list;
+		while (tmp)
 		{
-			if ((node->n) >= ((node->prev)->n))
-				node = node->next;
-			else if (!(node->next) && !((node->prev)->prev))
+			node = tmp->next;
+			while (node)
 			{
-				swap_two(node);
-				*list = node;
-				print_list(node);
-				node = node->next;
-			}
-			else
-			{
-				prev_node = node->prev;
-				next_node = node->next;
-				if (prev_node->prev && next_node)
-					swap_node(node);
-				else if (prev_node->prev == NULL)
+				if ((node->n) >= ((node->prev)->n))
+					node = node->next;
+				else if (!(node->next) && !((node->prev)->prev))
 				{
-					swap_start(node);
+					swap_two(node);
 					*list = node;
+					print_list(node);
 					node = node->next;
 				}
-				else if (next_node == NULL)
-					swap_end(node);
-				print_list(*list);
+				else
+				{
+					prev_node = node->prev;
+					next_node = node->next;
+					if (prev_node->prev && next_node)
+						swap_node(node);
+					else if (prev_node->prev == NULL)
+					{
+						swap_start(node);
+						*list = node;
+						node = node->next;
+					}
+					else if (next_node == NULL)
+						swap_end(node);
+					print_list(*list);
+				}
 			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
 }
 
