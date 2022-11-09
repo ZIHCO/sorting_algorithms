@@ -9,13 +9,8 @@
 
 void quick_sort(int *array, size_t size)
 {
-	int pi = partition(array, size);
-
-	if (array && pi > 0)
-	{
-		quick_sort(array, (pi - 1));
-		quick_sort(array, (size - pi - 1));
-	}
+	if (array && size >= 2)
+		quick_sort_rec(array, 0, size - 1);
 }
 
 /**
@@ -34,18 +29,41 @@ int partition(int *array, size_t size)
 
 	for (j = 0; j <= size - 2; j++)
 	{
-		if (array[j] < pivot)
+		if (array[j] <= pivot)
 		{
 			i++;
 			tmp = *(array + i);
 			array[i] = array[j];
 			array[j] = tmp;
-			print_array(array, size);
+			if (tmp != array[i])
+				print_array(array, size);
 		}
 	}
 	tmp = *(array + (i + 1));
 	array[i + 1] = array[size - 1];
 	array[size - 1] = tmp;
-	print_array(array, size);
+	if (tmp != array[i + 1])
+		print_array(array, size);
 	return (i + 1);
+}
+
+/**
+ * quick_sort_rec - ....
+ * @lo: .....
+ * @hi: .....
+ * @array: ....
+ * Return: ....
+ */
+
+void quick_sort_rec(int *array, int lo, int hi)
+{
+	int pi;
+
+	if (lo < hi)
+	{
+		pi = partition(array, hi + 1);
+
+		quick_sort_rec(array, lo, pi - 1);
+		quick_sort_rec(array, pi + 1, hi);
+	}
 }
